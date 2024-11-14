@@ -1,0 +1,1 @@
+import{_ as a}from"./D_ALQHC1.js";import{J as e,t as n,A as _,x as r}from"./DjLwZ6eP.js";const c={__name:"index",setup(s){return(m,t)=>{const o=a;return n(),e(o,{name:"admin"},{default:_(()=>t[0]||(t[0]=[r("div",null,"Dashboard",-1)])),_:1})}}};export{c as default};

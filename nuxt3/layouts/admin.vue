@@ -70,6 +70,4 @@ const authLogin = reactive({
     this.busy = false;
   },
 });
-
-console.log(fire.auth.login);
 </script>
