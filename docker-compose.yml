@@ -1,11 +1,27 @@
+networks:
+  main:
+    # driver: bridge
+
 services:
-  # docker run --rm -it -v $(pwd):/app -w /app node:18 npx nuxi@latest init nuxt3
-  nuxt3:
-    image: node:22
-    working_dir: /app
-    command: bash -c "yarn install && yarn dev"
-    env_file: ./nuxt3/.env
+  apache-php:
+    build: ./apache-php
     ports:
-      - 3000:3000
+      - 80:80
     volumes:
-      - ./nuxt3:/app
+      - ./app:/var/www/app
+    networks:
+      - main
+    depends_on:
+      - mysql
+
+  mysql:
+    build: ./mysql
+    env_file:
+      - ./mysql/.env
+    entrypoint: sh -c "/usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --default-authentication-plugin=mysql_native_password"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/entrypoint:/docker-entrypoint-initdb.d
+    networks:
+      - main
